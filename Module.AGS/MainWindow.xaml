@@ -5,37 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Module.AGS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="390" Width="800">
+    <Grid Margin="0,0,0,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="247.96"/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Station ID:" Margin="5"/>
-        <TextBox x:Name="txtStationID" Grid.Row="0" Grid.Column="1" Margin="5,5,370,5"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Address:" Margin="5"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Station ID:" Margin="5,5,5,5"/>
+        <ComboBox x:Name="cmbStationID" Grid.Row="0" Grid.Column="1" Margin="5,5,370,5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Address:" Margin="5,5,5,5"/>
         <TextBox x:Name="txtAddress" Grid.Row="1" Grid.Column="1" Margin="5,5,370,5"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Price AI92:" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Price AI92:" Margin="5,5,5,5"/>
         <TextBox x:Name="txtPriceAI92" Grid.Row="2" Grid.Column="1" Margin="5,5,370,5"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Price AI95:" Margin="5"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Price AI95:" Margin="5,5,5,5"/>
         <TextBox x:Name="txtPriceAI95" Grid.Row="3" Grid.Column="1" Margin="5,5,370,5"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Price AI98:" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Price AI98:" Margin="5,5,5,5"/>
         <TextBox x:Name="txtPriceAI98" Grid.Row="4" Grid.Column="1" Margin="5,5,370,5"/>
         <Label Grid.Row="5" Grid.Column="0" Content="Price Diesel:" Margin="5,5,5,217"/>
-        <TextBox x:Name="txtPriceDiesel" Grid.Row="5" Grid.Column="1" Margin="5,5,370,217"/>
-        <Button x:Name="btnLoad" Grid.Row="5" Grid.Column="0" Content="Load" Margin="5,127,5,5" Click="btnLoad_Click"/>
-        <Button x:Name="btnSave" Grid.Row="5" Grid.Column="1" Content="Save" Margin="5,127,5,5" Click="btnSave_Click"/>
+        <TextBox x:Name="txtPriceDiesel" Grid.Row="5" Grid.Column="1" Margin="5,5,370,211"/>
+        <Button x:Name="btnLoad" Grid.Row="5" Grid.Column="0" Content="Load" Margin="5,53,5,79" Click="btnLoad_Click"/>
+        <Button x:Name="btnSave" Grid.Row="5" Grid.Column="1" Content="Save" Margin="5,53,5,79" Click="btnSave_Click"/>
         <TextBox x:Name="txtRemainderAI92" Grid.Row="2" Grid.Column="1" Margin="359,5,16,5"/>
         <TextBox x:Name="txtRemainderAI95" Grid.Row="3" Grid.Column="1" Margin="359,5,16,5"/>
         <TextBox x:Name="txtRemainderAI98" Grid.Row="4" Grid.Column="1" Margin="359,5,16,5"/>
-        <TextBox x:Name="txtRemainderDiesel" Grid.Row="5" Grid.Column="1" Margin="359,5,16,217"/>
+        <TextBox x:Name="txtRemainderDiesel" Grid.Row="5" Grid.Column="1" Margin="359,5,16,211"/>
     </Grid>
 </Window>

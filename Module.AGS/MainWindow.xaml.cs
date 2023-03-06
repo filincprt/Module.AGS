@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
@@ -14,16 +15,27 @@ namespace Module.AGS
         public MainWindow()
         {
             InitializeComponent();
+            FillComboBox();
         }
+
+        private void FillComboBox()
+        {
+            var stations = new List<int>() { 1, 2, 3, 5, 6, 7, 8, 9, 10}; // пример значений station_id
+            foreach (var station in stations)
+            {
+                cmbStationID.Items.Add(station);
+            }
+        }
+
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
-            int stationID = int.Parse(txtStationID.Text);
+            int stationID = int.Parse(cmbStationID.Text);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string queryString = "SELECT * FROM ags_stations WHERE station_id = @stationID";
+                string queryString = "SELECT * FROM gas_stations WHERE station_id = @stationID";
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.Parameters.AddWithValue("@stationID", stationID);
