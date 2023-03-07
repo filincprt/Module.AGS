@@ -21,10 +21,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Station ID:" Margin="5,5,5,5"/>
-        <ComboBox x:Name="cmbStationID" Grid.Row="0" Grid.Column="1" Margin="5,5,370,5"/>
-
+        <TextBox x:Name="txtIdStation" Grid.Column="1" Margin="5,10,370,36" Text="" Grid.RowSpan="2"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Address:" Margin="5,5,5,5"/>
-        <TextBox x:Name="txtAddress" Grid.Row="1" Grid.Column="1" Margin="5,5,370,5"/>
+        <TextBox x:Name="txtAddress" Grid.Column="1" Margin="5,5,370,5" Grid.Row="1"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Price AI92:" Margin="5,5,5,5"/>
         <TextBox x:Name="txtPriceAI92" Grid.Row="2" Grid.Column="1" Margin="5,5,370,5"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Price AI95:" Margin="5,5,5,5"/>

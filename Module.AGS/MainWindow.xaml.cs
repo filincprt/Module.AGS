@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -15,22 +18,18 @@ namespace Module.AGS
         public MainWindow()
         {
             InitializeComponent();
-            FillComboBox();
-        }
-
-        private void FillComboBox()
-        {
-            var stations = new List<int>() { 1, 2, 3, 5, 6, 7, 8, 9, 10}; // пример значений station_id
-            foreach (var station in stations)
-            {
-                cmbStationID.Items.Add(station);
-            }
+          
         }
 
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
-            int stationID = int.Parse(cmbStationID.Text);
+            int id = Convert.ToInt32(txtIdStation.Text);
+            GetAndDisplayStationInfo(id);
+
+
+            /*
+            int stationID = int.Parse(txtIdStation.Text);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -61,14 +60,36 @@ namespace Module.AGS
                     }
                 }
             }
+            */
+
         }
+
+        private async Task GetAndDisplayStationInfo(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync($"http://localhost:50682/getStationinfo/{id}");
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var stationInfo = JsonConvert.DeserializeObject<StationInfo>(jsonString);
+                txtAddress.Text = stationInfo.Address;
+                txtPriceAI92.Text = stationInfo.PriceAI92.ToString();
+                txtPriceAI95.Text = stationInfo.PriceAI95.ToString();
+                txtPriceAI98.Text = stationInfo.PriceAI98.ToString();
+                txtPriceDiesel.Text = stationInfo.PriceDiesel.ToString();
+                txtRemainderAI92.Text = stationInfo.RemainderAI92.ToString();
+                txtRemainderAI95.Text = stationInfo.RemainderAI95.ToString();
+                txtRemainderAI98.Text = stationInfo.RemainderAI98.ToString();
+                txtRemainderDiesel.Text = stationInfo.RemainderDiesel.ToString();
+            }
+        }
+
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string queryString = "UPDATE ags_stations SET address=@address, price_AI92=@price_AI92, price_AI95=@price_AI95, price_AI98=@price_AI98, price_diesel=@price_diesel, remainder_AI92=@remainder_AI92, remainder_AI95=@remainder_AI95, remainder_AI98=@remainder_AI98, remainder_diesel=@remainder_diesel WHERE station_id=@stationID";
+                string queryString = "UPDATE gas_stations SET address=@address, price_AI92=@price_AI92, price_AI95=@price_AI95, price_AI98=@price_AI98, price_diesel=@price_diesel, remainder_AI92=@remainder_AI92, remainder_AI95=@remainder_AI95, remainder_AI98=@remainder_AI98, remainder_diesel=@remainder_diesel WHERE station_id=@stationID";
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.Parameters.AddWithValue("@address", txtAddress.Text);
